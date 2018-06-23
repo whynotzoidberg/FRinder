@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{this.title}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(true)" (throwoutright)="voteUp(false)" id="card-stack">
+    <ion-card  #mycards1 swing-card *ngFor="let c of cards">
+      <img [src]="c.img" id="picture"/>
+      <div class="card-title">{{ c.name }}</div>
+    </ion-card>
+  </div>
+  <p style="text-align: center; width: 100%;">{{ recentCard }}</p>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button color="secondary" [disabled]="this.numberOfLiked<=0">Beenden({{this.numberOfLiked}})</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col text-left>
+          <button ion-button large ion-button color="secondary" round (click)="voteUp(true)">
+            <ion-icon name="thumbs-up"></ion-icon>
+            {{this.positiveSaying}}
+          </button>
+        </ion-col>
+        <ion-col text-right>
+          <button ion-button large icon-left color="danger" round (click)="voteUp(false)">
+            <ion-icon name="thumbs-down"></ion-icon>
+            {{ this.negativeSaying }}
+          </button>
+        </ion-col>
+    </ion-row>
+
+  </ion-toolbar>
+</ion-footer>
+
+<!--<content-drawer [options]="drawerOptions">
+  <div class="content">
+    The world is your oyster.
+    <p>
+      If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
+    </p>
+  </div>
+</content-drawer>-->
