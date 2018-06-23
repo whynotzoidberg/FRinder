@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {HomePage} from "../home/home";
+import {StartPage} from "../start/start";
 
 /**
  * Generated class for the ResultPage page.
@@ -25,6 +25,11 @@ export class ResultPage {
     console.log('ionViewDidLoad ResultPage');
     this.likedCards = this.navParams.get('likedCards');
     console.log(this.likedCards);
+  }
+
+  restart(){
+    this.navCtrl.push(StartPage, {
+    });
   }
 
 }

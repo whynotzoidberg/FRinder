@@ -6,9 +6,6 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Dinge die du magst</ion-title>
-  </ion-navbar>
 
 </ion-header>
 
@@ -27,11 +24,26 @@
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-card>
-
       </ion-item>
-
-
-
     </ion-list>
+
+    <ion-footer>
+      <ion-toolbar>
+        <ion-row>
+        <ion-col text-left (click)="restart()">
+          <button ion-button icon-start>
+            <ion-icon name="refresh-circle"></ion-icon>
+          </button>
+
+        </ion-col>
+        <ion-col text-right>
+          <button ion-button icon-start>
+            <ion-icon name="map"></ion-icon>
+          </button>
+
+        </ion-col>
+        </ion-row>
+      </ion-toolbar>
+    </ion-footer>
 
 </ion-content>
