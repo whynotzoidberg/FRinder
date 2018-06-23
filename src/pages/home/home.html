@@ -4,8 +4,8 @@
       <ion-col class="card-frame" style="max-width: 700px;">
         <div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(true)" (throwoutright)="voteUp(false)" id="card-stack">
             <ion-card id="card" #mycards1 swing-card *ngFor="let c of cards">
-              <img class="card-img" *ngIf="c" id="cardImg" draggable="false" [src]="c.img" />
-              <div class="card-title" *ngIf="c" id="cardTitle">{{ c.name }}</div>
+              <img class="card-img" *ngIf="c && c.img" id="cardImg" draggable="false" [src]="c.img" />
+              <div class="card-title" *ngIf="c && c.name" id="cardTitle">{{ c.name }}</div>
             </ion-card>
         </div>
       </ion-col>
@@ -21,7 +21,7 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <ion-row *ngIf="this.cards && this.cards.length > 0">
+    <ion-row *ngIf="this.cards && this.cards.length > 0 && recentCard">
       <ion-col text-left>
         <button id="btn-dislike" ion-button color="primary" outline (click)="voteUp(false)">
           <ion-icon name="thumbs-down"></ion-icon>

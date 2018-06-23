@@ -67,11 +67,7 @@ export class HomePage {
   ngAfterViewInit() {
     // Either subscribe in controller or set in HTML
     this.swingStack.throwin.subscribe((event: DragEvent) => {
-      console.log(event.target);
 
-      //document.getElementById("cardTitle").style.backgroundColor = "white";
-      //document.getElementById("cardImg").style.backgroundColor = "white";
-     // event.target.style.background= 'background:rgba(255,255,255, 1);';
     });
 
     this.cards = [];
@@ -109,7 +105,6 @@ export class HomePage {
       color = '#' + hexCode + 'FF' + hexCode;
     }
 
-    console.log(color);
     if(color=="#100FF100"){
       element.style.background = "white";
     }else{
