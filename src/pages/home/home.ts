@@ -67,15 +67,11 @@ export class HomePage {
   ngAfterViewInit() {
     // Either subscribe in controller or set in HTML
     this.swingStack.throwin.subscribe((event: DragEvent) => {
-
     });
-
     this.cards = [];
     this.buffer = [];
-    // this.addNewCards(1);
-    this.fillBuffer();
+    this.fillBuffer(true);
   }
-
   clickOnCategory(name:string){
     this.navCtrl.push(DetailsPage, {
      name : name
@@ -116,6 +112,15 @@ export class HomePage {
 // Connected through HTML
   voteUp(like: boolean) {
     let removedCard = this.cards.pop();
+    if(this.numberOfLiked >= 7){
+      this.showResults();
+      return;
+    }
+    if(!removedCard) {
+      this.fillBuffer(true);
+      return;
+    }
+
 
     if (like) {
       this.recentCard = 'Du mochtest: ' + removedCard.name;
@@ -124,15 +129,15 @@ export class HomePage {
       this.curLon = removedCard.lng;
       this.likedCards.push(removedCard);
       this.likedPlaceIds.push(removedCard.place_id);
-      this.addNewCardsFromServer(1);
+      this.addNewCardsFromServer();
     } else {
       this.recentCard = 'Du mochtest nicht: ' + removedCard.name;
-      this.addNewCardsFromBuffer(1);
+      this.addNewCardsFromBuffer();
     }
   }
 
 // Add new cards to our array
-  fillBuffer() {
+  fillBuffer(andAdd?:boolean) {
     let url:string = (this.title == 'Sehenswert')? "http://5.230.145.170/FRinder/places/sightseeing":"http://5.230.145.170/FRinder/places/shopping";
     let body = new FormData();
     if(this.curLat){
@@ -144,8 +149,7 @@ export class HomePage {
       for (let val of resultList) {
         this.buffer.push(val);
       }
-      this.cards.pop();
-      this.addNewCardsFromBuffer(1);
+      if(andAdd)this.cards.push(this.buffer.pop());
     });
   }
 
@@ -156,19 +160,23 @@ export class HomePage {
   }
 
   // Add new cards to our array
-  addNewCardsFromBuffer(count: number) {
+  addNewCardsFromBuffer() {
     this.positiveSaying = this.getPositiveSaying();
     this.negativeSaying = this.getNegativeSaying();
+    this.cards = [];
     this.cards.push(this.buffer.pop());
+    if(this.buffer.length <= 0){
+      this.fillBuffer();
+    }
   }
 
   // Add new cards to our array
-  addNewCardsFromServer(count: number) {
+  addNewCardsFromServer() {
     this.positiveSaying = this.getPositiveSaying();
     this.negativeSaying = this.getNegativeSaying();
     this.buffer = [];
-    this.fillBuffer();
-    this.cards.push(this.buffer.pop());
+    this.cards = [];
+    this.fillBuffer(true);
   }
 
 // http://stackoverflow.com/questions/57803/how-to-convert-decimal-to-hex-in-javascript

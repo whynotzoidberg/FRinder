@@ -33,6 +33,17 @@ export class ResultPage {
     });
   }
 
+  deleteItem(i){
+    this.likedCards.splice(i,1);
+    if(this.likedCards.length <= 0){
+      this.restart();
+    }
+  }
+
+  getMapLink(i){
+    return "https://www.google.com/maps/@" +  this.likedCards[i].lng + ","+  this.likedCards[i].lat;
+  }
+
   createMapLink() {
 
     // https://maps.googleapis.com/maps/api/directions/json?origin=47.994939,7.842517&mode=walking&destination=47.994939,7.842517

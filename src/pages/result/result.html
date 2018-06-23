@@ -1,49 +1,35 @@
-<!--
-  Generated template for the ResultPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<!-- <ion-header>
-
-
-</ion-header> -->
-
-
-
-
 <ion-content class="card-background-page">
 
   <ion-list>
-    <ion-item *ngFor="let c of this.likedCards">
-
-      <ion-card style="height:100px;" *ngIf="c">
+    <ion-item *ngFor="let c of this.likedCards; let i = index;">
+      <a target="_blank" href="{{getMapLink(i)}}">
+      <ion-card style="height:100px;" *ngIf="c" >
         <img [src]="c.img" />
         <div class="card-title strokeme">{{c.name}}</div>
-        <button ion-button icon-only>
-          <ion-icon name="home"></ion-icon>
+        <button ion-button small style="position: absolute; top: 1%; right: 1%;" (click)="deleteItem(i)">
+          <ion-icon name="trash"></ion-icon>
         </button>
       </ion-card>
+      </a>
     </ion-item>
   </ion-list>
-
-  <ion-footer>
-    <ion-toolbar>
-      <ion-row>
-        <ion-col text-left (click)="restart()">
-          <button ion-button icon-start>
-            <ion-icon icon-left name="refresh-circle"></ion-icon>
-          </button>
-
-        </ion-col>
-        <ion-col text-right (click)="createMapLink()">
-          <button ion-button icon-start>
-            <ion-icon icon-left name="map"></ion-icon>
-          </button>
-
-        </ion-col>
-      </ion-row>
-    </ion-toolbar>
-  </ion-footer>
-
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col text-left (click)="restart()">
+        <button ion-button icon-start>
+          <ion-icon icon-left name="refresh-circle"></ion-icon>
+        </button>
+
+      </ion-col>
+      <ion-col text-right (click)="createMapLink()">
+        <button ion-button icon-start>
+          <ion-icon icon-left name="map"></ion-icon>
+        </button>
+
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
