@@ -1,58 +1,42 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      {{this.title}}
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
 <ion-content class="card-background-page">
-
   <ion-grid>
     <ion-row>
-      <ion-col col-1>
-      </ion-col>
-      <ion-col col-10>
-
+      <ion-col class="card-frame">
         <div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(true)" (throwoutright)="voteUp(false)" id="card-stack">
-          <ion-card #mycards1 swing-card *ngFor="let c of cards">
-            <img draggable="false" [src]="c.img" />
-            <div class="card-title">{{ c.name }}</div>
-          </ion-card>
+            <ion-card #mycards1 swing-card *ngFor="let c of cards">
+              <img class="card-img" draggable="false" [src]="c.img" />
+              <div class="card-title">{{ c.name }}</div>
+            </ion-card>
         </div>
-        <p style="text-align: center; width: 100%;">{{ recentCard }}</p>
       </ion-col>
-      <ion-col col-1>
+    </ion-row>
+    <ion-row *ngIf='recentCard'>
+      <ion-col>
+        <ion-card class="card-txt">
+          <p>{{ recentCard }}</p>
+        </ion-card>
       </ion-col>
-
     </ion-row>
   </ion-grid>
-
 </ion-content>
-
 <ion-footer>
   <ion-toolbar>
     <ion-row>
-      <ion-col text-center>
-        <button ion-button color="dark" round [disabled]="this.numberOfLiked<=0" (click)="showResults()"> Beenden ({{this.numberOfLiked}})</button>
+      <ion-col text-left>
+        <button id="btn-dislike" ion-button color="primary" outline (click)="voteUp(false)">
+          <ion-icon name="thumbs-down"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col text-right>
+        <button id="btn-like" ion-button color="secondary" outline (click)="voteUp(true)">
+          <ion-icon name="thumbs-up"></ion-icon>
+        </button>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col text-left>
-        <button ion-button icon-left color="primary" round outline (click)="voteUp(false)">
-          <ion-icon name="thumbs-down"></ion-icon>
-          {{ this.negativeSaying }}
-        </button>
-
-      </ion-col>
-      <ion-col text-right>
-        <button ion-button icon-left color="secondary" round outline (click)="voteUp(true)">
-          <ion-icon name="thumbs-up"></ion-icon>
-          {{ this.positiveSaying }}
-        </button>
-
+      <ion-col text-center>
+        <button id="btn-close" ion-button color="dark" [disabled]="this.numberOfLiked<=0" outline (click)="showResults()">Beenden ({{this.numberOfLiked}})</button>
       </ion-col>
     </ion-row>
-
   </ion-toolbar>
 </ion-footer>

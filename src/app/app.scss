@@ -24,10 +24,57 @@ ion-header .toolbar-background {
 .toolbar-title.toolbar-title-wp { color: color($colors, light); }
 
 button {
-  background-color: white;
+  background-color: transparent;
   padding: 0;
   margin: 0;
+
 }
 
+.card-frame{
+	max-width:400px;
+	margin-right: auto;
+	margin-left: auto;
+}
 
+.card-md{
+	border-radius:0px!important;
+}
 
+.card-title{
+	font-size: 24px;
+	color: #444444;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding: 10px
+}
+
+.card-background-page{
+	background-image:url('http://www.heilpraxisnet.de/wp-content/uploads/2015/11/Landschaft-Gesundheit-foerderlich-1024x483.jpg'); 
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.card-txt{
+	text-align: center;
+	margin-top: -5px;
+}
+
+.card-txt p{
+	padding: 10px;
+}
+
+.card-img{
+	padding: 15px
+}
+
+#btn-close{
+	width: 100%;
+}
+#btn-dislike{
+	width: 100%;
+}
+#btn-like{
+	width: 100%;
+}
