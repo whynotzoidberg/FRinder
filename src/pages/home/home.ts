@@ -9,6 +9,7 @@ import {
   SwingStackComponent,
   SwingCardComponent} from 'angular2-swing';
 import {DetailsPage} from "../details/details";
+import {ResultPage} from "../result/result";
 
 @Component({
   templateUrl: 'home.html'
@@ -23,6 +24,7 @@ export class HomePage {
   buffer: Array<any>;
   stackConfig: StackConfig;
   recentCard: string = '';
+  likedCards: any[] = [];
   title: string = '';
   numberOfLiked: number;
   positiveSayings: any[] = new Array("Super" , "Interessant", "Cool", "Schön", "Prima");
@@ -104,12 +106,13 @@ export class HomePage {
   }
 
 // Connected through HTML
-  voteUp(dontLike: boolean) {
+  voteUp(like: boolean) {
     let removedCard = this.cards.pop();
     this.addNewCards(1);
-    if (!dontLike) {
+    if (like) {
       this.recentCard = 'Du mochtest: ' + removedCard.name;
       this.numberOfLiked++;
+      this.likedCards.push(removedCard);
     } else {
       this.recentCard = 'Du mochtest nicht: ' + removedCard.name;
     }
@@ -117,8 +120,11 @@ export class HomePage {
 
 // Add new cards to our array
   fillBuffer() {
-    this.http.get("http://5.230.145.170/FRinder/places/sightseeing")
+    let url:string = (this.title == 'Sehenswert')? 'http://5.230.145.170/FRinder/places/sightseeing':'http://5.230.145.170/FRinder/places/shopping';
+
+    this.http.get(url)
       .subscribe(result => {
+        console.log(result);
         let resultList = result.json().result;
         for (let val of resultList) {
           this.buffer.push(val);
@@ -126,6 +132,13 @@ export class HomePage {
         this.addNewCards(1);
       });
 
+  }
+
+  showResults(){
+
+    this.navCtrl.push(ResultPage, {
+      likedCards: this.likedCards
+    });
   }
 
   // Add new cards to our array

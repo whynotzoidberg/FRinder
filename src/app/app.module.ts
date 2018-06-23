@@ -10,6 +10,7 @@ import { HttpModule } from '@angular/http';
 import { SwingModule } from 'angular2-swing';
 import {StartPage} from "../pages/start/start";
 import { ContentDrawer } from '../components/content-drawer/content-drawer';
+import {ResultPage} from "../pages/result/result";
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ContentDrawer } from '../components/content-drawer/content-drawer';
     MyApp,
     HomePage,
     StartPage,
+    ResultPage,
     ContentDrawer
   ],
   imports: [
@@ -29,8 +31,8 @@ import { ContentDrawer } from '../components/content-drawer/content-drawer';
   entryComponents: [
     MyApp,
     StartPage,
+    ResultPage,
     HomePage
-
   ],
   providers: [
     StatusBar,
