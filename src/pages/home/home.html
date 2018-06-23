@@ -16,8 +16,8 @@
 
   <div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(true)" (throwoutright)="voteUp(false)" id="card-stack">
     <ion-card  #mycards1 swing-card *ngFor="let c of cards">
-      <img [src]="c.img"/>
-      <div class="card-title">{{ c.name }}</div>
+      <img  *ngIf="c" [src]="c.img"/>
+      <div class="card-title" *ngIf="c" >{{ c.name }}</div>
     </ion-card>
   </div>
   <p style="text-align: center; width: 100%;">{{ recentCard }}</p>

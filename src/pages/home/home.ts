@@ -1,6 +1,7 @@
 import { Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import { Http } from '@angular/http';
+import { HttpHeaders } from '@angular/common/http';
 import 'rxjs/Rx';
 
 import {
@@ -29,6 +30,8 @@ export class HomePage {
   numberOfLiked: number;
   positiveSayings: any[] = new Array("Super" , "Interessant", "Cool", "Schön", "Prima");
   negativeSayings: any[] = new Array("Ne" , "Eher nicht", "Nein", "Bloß nicht", "Schrott");
+  curLon: string;
+  curLat: string;
 
   positiveSaying: string = this.getPositiveSaying();
   negativeSaying: string = this.getNegativeSaying();
@@ -112,6 +115,8 @@ export class HomePage {
     if (like) {
       this.recentCard = 'Du mochtest: ' + removedCard.name;
       this.numberOfLiked++;
+      this.curLat = removedCard.lat;
+      this.curLon = removedCard.lng;
       this.likedCards.push(removedCard);
     } else {
       this.recentCard = 'Du mochtest nicht: ' + removedCard.name;
@@ -120,22 +125,21 @@ export class HomePage {
 
 // Add new cards to our array
   fillBuffer() {
-    let url:string = (this.title == 'Sehenswert')? 'http://5.230.145.170/FRinder/places/sightseeing':'http://5.230.145.170/FRinder/places/shopping';
-
-    this.http.get(url)
-      .subscribe(result => {
-        console.log(result);
-        let resultList = result.json().result;
-        for (let val of resultList) {
-          this.buffer.push(val);
-        }
-        this.addNewCards(1);
-      });
-
+    let url:string = (this.title == 'Sehenswert')? "http://5.230.145.170/FRinder/places/sightseeing?long=lol":"http://5.230.145.170/FRinder/places/shopping?long=1";
+    let body = new FormData();
+    body.append('long', this.curLon);
+    body.append('lat',  this.curLat);
+    this.http.post(url, body) .subscribe(result => {
+      console.log(result);
+      let resultList = result.json().result;
+      for (let val of resultList) {
+        this.buffer.push(val);
+      }
+      this.addNewCards(1);
+    });
   }
 
   showResults(){
-
     this.navCtrl.push(ResultPage, {
       likedCards: this.likedCards
     });
