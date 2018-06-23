@@ -21,6 +21,12 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar>
+<!-- 
+  FIXME:  *ngIf="this.cards && this.cards.length > 0" not working
+  
+      TypeError: Cannot read property 'name' of undefined at HomePage.webpackJsonp.210.HomePage.voteUp ...
+
+-->
     <ion-row *ngIf="this.cards && this.cards.length > 0">
       <ion-col text-left>
         <button id="btn-dislike" ion-button color="primary" outline (click)="voteUp(false)">
