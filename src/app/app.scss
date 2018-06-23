@@ -23,5 +23,11 @@ ion-header .toolbar-background {
 .toolbar-title.toolbar-title-ios, 
 .toolbar-title.toolbar-title-wp { color: color($colors, light); }
 
+button {
+  background-color: white;
+  padding: 0;
+  margin: 0;
+}
+
 
 
