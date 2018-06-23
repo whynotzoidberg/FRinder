@@ -21,7 +21,7 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <ion-row>
+    <ion-row *ngIf="this.cards && this.cards.length > 0">
       <ion-col text-left>
         <button id="btn-dislike" ion-button color="primary" outline (click)="voteUp(false)">
           <ion-icon name="thumbs-down"></ion-icon>

@@ -1,6 +1,7 @@
 import { Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import { Http } from '@angular/http';
+import { HttpHeaders } from '@angular/common/http';
 import 'rxjs/Rx';
 
 import {
@@ -29,6 +30,9 @@ export class HomePage {
   numberOfLiked: number;
   positiveSayings: any[] = new Array("Super" , "Interessant", "Cool", "Schön", "Prima");
   negativeSayings: any[] = new Array("Ne" , "Eher nicht", "Nein", "Bloß nicht", "Schrott");
+  curLon: string;
+  curLat: string;
+  likedPlaceIds: any[] = [];
 
   positiveSaying: string = this.getPositiveSaying();
   negativeSaying: string = this.getNegativeSaying();
@@ -108,43 +112,58 @@ export class HomePage {
 // Connected through HTML
   voteUp(like: boolean) {
     let removedCard = this.cards.pop();
-    this.addNewCards(1);
+
     if (like) {
       this.recentCard = 'Du mochtest: ' + removedCard.name;
       this.numberOfLiked++;
+      this.curLat = removedCard.lat;
+      this.curLon = removedCard.lng;
       this.likedCards.push(removedCard);
+      this.likedPlaceIds.push(removedCard.place_id);
+      this.addNewCardsFromServer(1);
     } else {
       this.recentCard = 'Du mochtest nicht: ' + removedCard.name;
+      this.addNewCardsFromBuffer(1);
     }
   }
 
 // Add new cards to our array
   fillBuffer() {
-    let url:string = (this.title == 'Sehenswert')? 'http://5.230.145.170/FRinder/places/sightseeing':'http://5.230.145.170/FRinder/places/shopping';
-
-    this.http.get(url)
-      .subscribe(result => {
-        console.log(result);
-        let resultList = result.json().result;
-        for (let val of resultList) {
-          this.buffer.push(val);
-        }
-        this.addNewCards(1);
-      });
-
+    let url:string = (this.title == 'Sehenswert')? "http://5.230.145.170/FRinder/places/sightseeing":"http://5.230.145.170/FRinder/places/shopping";
+    let body = new FormData();
+    if(this.curLat){
+    body.append('currentLocation', this.curLat + "," + this.curLon);
+    body.append('excludedLocations', this.likedPlaceIds.join(","));
+    }
+    this.http.post(url, body) .subscribe(result => {
+      let resultList = result.json().result;
+      for (let val of resultList) {
+        this.buffer.push(val);
+      }
+      this.cards.pop();
+      this.addNewCardsFromBuffer(1);
+    });
   }
 
   showResults(){
-
     this.navCtrl.push(ResultPage, {
       likedCards: this.likedCards
     });
   }
 
   // Add new cards to our array
-  addNewCards(count: number) {
+  addNewCardsFromBuffer(count: number) {
     this.positiveSaying = this.getPositiveSaying();
     this.negativeSaying = this.getNegativeSaying();
+    this.cards.push(this.buffer.pop());
+  }
+
+  // Add new cards to our array
+  addNewCardsFromServer(count: number) {
+    this.positiveSaying = this.getPositiveSaying();
+    this.negativeSaying = this.getNegativeSaying();
+    this.buffer = [];
+    this.fillBuffer();
     this.cards.push(this.buffer.pop());
   }
 
