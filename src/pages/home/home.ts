@@ -67,7 +67,11 @@ export class HomePage {
   ngAfterViewInit() {
     // Either subscribe in controller or set in HTML
     this.swingStack.throwin.subscribe((event: DragEvent) => {
-      event.target.style.background = '#ffffff';
+      console.log(event.target);
+
+      //document.getElementById("cardTitle").style.backgroundColor = "white";
+      //document.getElementById("cardImg").style.backgroundColor = "white";
+     // event.target.style.background= 'background:rgba(255,255,255, 1);';
     });
 
     this.cards = [];
@@ -105,7 +109,12 @@ export class HomePage {
       color = '#' + hexCode + 'FF' + hexCode;
     }
 
-    element.style.background = color;
+    console.log(color);
+    if(color=="#100FF100"){
+      element.style.background = "white";
+    }else{
+      element.style.background = color;
+    }
     element.style['transform'] = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
   }
 
@@ -135,7 +144,7 @@ export class HomePage {
     body.append('currentLocation', this.curLat + "," + this.curLon);
     body.append('excludedLocations', this.likedPlaceIds.join(","));
     }
-    this.http.post(url, body) .subscribe(result => {
+    this.http.post(url, body).subscribe(result => {
       let resultList = result.json().result;
       for (let val of resultList) {
         this.buffer.push(val);

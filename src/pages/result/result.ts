@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {StartPage} from "../start/start";
+import { Http } from '@angular/http';
+
 
 /**
  * Generated class for the ResultPage page.
@@ -17,7 +19,7 @@ import {StartPage} from "../start/start";
 export class ResultPage {
 
   likedCards: any[] = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http) {
 
   }
 
@@ -53,7 +55,22 @@ export class ResultPage {
     url +=  "&key=AIzaSyDRMVqSJjQJ2bnodfTwNcIJy1wpXiYYaYE";
 
 
-    console.log(url);
+    let body = new FormData();
+    body.append('routeLink', url);
+    let backendUrl = "http://5.230.145.170/FRinder/places/route";
+    this.http.post(backendUrl, body).subscribe(result => {
+      let resultList = result.json().result;
+       console.log(resultList.routes);
+
+      let routes = resultList.routes;
+      routes.forEach((value)=>{
+
+      });
+
+
+    });
+
+
 
   };
 }
