@@ -41,7 +41,7 @@ export class ResultPage {
   }
 
   getMapLink(i){
-    return "https://www.google.com/maps/@" +  this.likedCards[i].lng + ","+  this.likedCards[i].lat;
+    return "https://www.google.com/maps/place/?q=place_id:" +  this.likedCards[i].place_id;
   }
 
   createMapLink() {
@@ -64,7 +64,6 @@ export class ResultPage {
     });
 
     url +=  "&key=AIzaSyDRMVqSJjQJ2bnodfTwNcIJy1wpXiYYaYE";
-
 
     let body = new FormData();
     body.append('routeLink', url);
