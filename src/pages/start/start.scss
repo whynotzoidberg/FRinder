@@ -6,7 +6,12 @@ page-start {
     margin: 10px auto;
   }
   .logo-row {
-    width: auto;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    width: 100%;
     background-color: white;
     height: 100px;
     padding: 0;
