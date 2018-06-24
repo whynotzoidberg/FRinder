@@ -48,29 +48,36 @@ export class ResultPage {
 
   getRouteLink(){
 
+    let link = this.createMapLink();
+    console.log(link);
+    window.open( link, "Zweitfenster", "width=300,height=400,left=100,top=200");
+
   }
 
   getShareLink(){
-
+    return this.createMapLink();
   }
 
-  createMapLink() {
+  createMapLink():string {
 
     // https://maps.googleapis.com/maps/api/directions/json?origin=47.994939,7.842517&mode=walking&destination=47.994939,7.842517
     //   // &waypoints=optimize:true%7C47.9763016,7.8177525%7C47.9848895,7.8541669&key=AIzaSyDRMVqSJjQJ2bnodfTwNcIJy1wpXiYYaYE
 
 
-   // https://maps.googleapis.com/maps/api/directions/json?origin=47.994939,7.842517&mode=walking&destination=
-    // 47.9984746,7.8293129&waypoints=optimize:trueG.9961777,7.8381631G.9955918,7.8118858%&key=AIzaSyDRMVqSJjQJ2bnodfTwNcIJy1wpXiYYaYE
+    // https://maps.googleapis.com/maps/api/directions/json?origin=47.994939,7.842517&mode=walking&
+    // destination=47.997046,7.857177&waypoints=optimize:true%7C7.854290,47.992771%7C7.858306,47.993676%7C7.857177,47.997046%7C&key=AIzaSyDRMVqSJjQJ2bnodfTwNcIJy1wpXiYYaYE
 
     let url:string = 'https://maps.googleapis.com/maps/api/directions/json?origin=47.994939,7.842517&mode=walking&destination=';
+    let callUrl = "";
 
-    let dest = this.likedCards.pop();
-    url +=  dest.lat + "," + dest.lng + "&waypoints=optimize:true%";
+    let dests = this.likedCards.slice();
+    if(!dests || dests.length <= 0)return;
+    let dest = dests.pop();
 
-    this.likedCards.forEach(function (value) {
-      console.log(value);
-      url += value.lng + "," + value.lat + "%7C";
+    url += dest.lat + "," + dest.lng + "&waypoints=optimize:true%7C";
+
+    dests.forEach(function (value) {
+      url += value.lat + "," + value.lng + "%7C";
     });
 
     url +=  "&key=AIzaSyDRMVqSJjQJ2bnodfTwNcIJy1wpXiYYaYE";
@@ -80,16 +87,28 @@ export class ResultPage {
     let backendUrl = "http://5.230.145.170/FRinder/places/route";
     this.http.post(backendUrl, body).subscribe(result => {
       let resultList = result.json().result;
-       console.log(resultList.routes);
+      callUrl = "https://www.google.com/maps/dir/";
 
       let routes = resultList.routes;
       routes.forEach((value)=>{
 
+       value.legs.forEach((leg)=>{
+          let end = leg.end_location;
+          let lat = end.lat;
+          let lng = end.lng;
+
+         callUrl += end.lat + "," + end.lng + "/"
+
+       });
+
       });
 
+      callUrl += "@47.984928,7.827998/data=!4m2!4m1!3e2";
 
     });
 
+
+    return callUrl;
 
 
   };
