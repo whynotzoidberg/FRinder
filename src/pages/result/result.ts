@@ -40,8 +40,18 @@ export class ResultPage {
     }
   }
 
+
+
   getMapLink(i){
     return "https://www.google.com/maps/place/?q=place_id:" +  this.likedCards[i].place_id;
+  }
+
+  getRouteLink(){
+
+  }
+
+  getShareLink(){
+
   }
 
   createMapLink() {
