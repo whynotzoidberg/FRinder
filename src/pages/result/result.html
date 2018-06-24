@@ -16,37 +16,23 @@
 <ion-footer>
   <ion-toolbar>
     <ion-row>
-      <ion-col text-left (click)="restart()">
-        <button ion-button icon-start>
+      <ion-col text-left>
+        <button ion-button icon-start (click)="restart()">
           <ion-icon icon-left name="refresh-circle"></ion-icon>
-          Neu startern
+          Neu
         </button>
-<<<<<<< HEAD
-        <ion-col text-center>
-          <button id="btn-close" ion-button color="dark" outline>Teilen</button>
-
-        </ion-col>
 
       </ion-col>
+      <ion-col>
+        <button id="btn-close" ion-button color="dark" outline>Teilen</button>
+
+      </ion-col>
+
       <ion-col text-right>
         <button ion-button icon-start (click)="getRouteLink()">
           <ion-icon icon-left name="map"></ion-icon>
+          Tour
         </button>
-=======
-      </ion-col>
-      <ion-col text-center>
-        <a target="_blank" href="{{getShareLink()}}">
-          <button id="btn-close" ion-button color="dark" outline>Teilen</button>
-        </a>
-      </ion-col>
-      <ion-col text-right>
-        <a target="_blank" href="{{getRouteLink()}}">
-          <button ion-button icon-start>
-            <ion-icon icon-left name="map"></ion-icon>
-            Tour erstellen
-          </button>
-        </a>
->>>>>>> 80cc29a5c35ad2891c104133ab14f5e492f9ce94
       </ion-col>
     </ion-row>
   </ion-toolbar>
