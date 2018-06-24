@@ -9,6 +9,12 @@
         <button ion-button small style="position: absolute; top: 1%; right: 1%;" (click)="deleteItem(i)">
           <ion-icon name="trash"></ion-icon>
         </button>
+        <ion-badge *ngIf="c.badge == 1" large color="secondary" item-end style="position: absolute; bottom: 1%; right: 1%; font-size: 1.3rem;
+ width: 200px; font-size: 20px;
+" >10% OFF</ion-badge>
+        <ion-badge *ngIf="c.badge == 2" large color="primary" item-end style="position: absolute; bottom: 1%; right: 1%; font-size: 1.3rem;
+ width: 200px; font-size: 20px;
+" >2 für 1</ion-badge>
       </ion-card>
     </ion-item>
   </ion-list>

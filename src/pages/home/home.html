@@ -3,7 +3,15 @@
     <div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(false)" (throwoutright)="voteUp(true)" id="card-stack">
       <ion-card id="card" #mycards1 swing-card *ngFor="let c of cards">
         <img class="card-img" *ngIf="c && c.img" id="cardImg" draggable="false" [src]="c.img" style="max-height: 570px;" />
+        <ion-badge *ngIf="c.badge == 1" large color="secondary" item-end style="position: absolute; top: 10%; right: 1%; font-size: 1.3rem;
+ width: 200px; font-size: 20px;
+" >10% OFF</ion-badge>
+        <ion-badge *ngIf="c.badge == 2" large color="primary" item-end style="position: absolute; top: 10%; right: 1%; font-size: 1.3rem;
+ width: 200px; font-size: 20px;
+" >2 für 1</ion-badge>
+
         <div class="card-title" *ngIf="c && c.name" id="cardTitle">{{ c.name }}</div>
+
       </ion-card>
     </div>
     <ion-card *ngIf='recentCard' class="card-txt">
