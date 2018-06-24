@@ -2,15 +2,17 @@
 
   <ion-list>
     <ion-item *ngFor="let c of this.likedCards; let i = index;">
-      <a target="_blank" href="{{getMapLink(i)}}">
+
       <ion-card style="height:100px;" *ngIf="c" >
         <img [src]="c.img" />
+        <a target="_blank" href="{{getMapLink(i)}}">
         <div class="card-title strokeme">{{c.name}}</div>
+        </a>
         <button ion-button small style="position: absolute; top: 1%; right: 1%;" (click)="deleteItem(i)">
           <ion-icon name="trash"></ion-icon>
         </button>
       </ion-card>
-      </a>
+
     </ion-item>
   </ion-list>
 </ion-content>
