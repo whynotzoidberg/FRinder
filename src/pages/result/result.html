@@ -1,9 +1,9 @@
 <ion-content class="card-background-page" >
 
-  <ion-list>
+  <ion-list class="card-custom-list">
     <ion-item *ngFor="let c of this.likedCards; let i = index;">
 
-      <ion-card style="height:100px;" *ngIf="c" >
+      <ion-card class="result-custom-card" style="height:100px;" *ngIf="c" >
         <img [src]="c.img" />
         <a target="_blank" href="{{getMapLink(i)}}">
         <div class="card-title strokeme">{{c.name}}</div>

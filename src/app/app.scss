@@ -82,3 +82,32 @@ button {
 .scroll-content{
   margin-left: auto; margin-right: auto; max-width: 700px;
 }
+
+.card-custom-list{
+	padding: 0 20px 0 20px;
+}
+
+.result-custom-card{
+}
+
+.label-md {
+	margin: 0px;
+}
+
+.item-md.item-block .item-inner{
+	padding: 0px;
+}
+
+.item-md{
+	padding: 0px;
+}
+
+.card-custom-list .item-md{
+	margin-top:20px;
+}
+
+page-result .card-background-page .card-title{
+	top: 0!important;
+	padding: 35px 0 20px 30px!important;
+	font-size: 2em!important;
+}
