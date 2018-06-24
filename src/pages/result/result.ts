@@ -47,7 +47,7 @@ export class ResultPage {
   }
 
 
-  createMapLink():string {
+  createMapLink(fb?:boolean):string {
 
     // https://maps.googleapis.com/maps/api/directions/json?origin=47.994939,7.842517&mode=walking&destination=47.994939,7.842517
     //   // &waypoints=optimize:true%7C47.9763016,7.8177525%7C47.9848895,7.8541669&key=AIzaSyDRMVqSJjQJ2bnodfTwNcIJy1wpXiYYaYE
@@ -79,8 +79,12 @@ export class ResultPage {
       console.log(result);
 
       let resultList = result.json().result;
-      callUrl = "https://www.google.com/maps/dir/";
-
+      if(fb){
+        callUrl = "https://www.facebook.com/sharer/sharer.php?u=https://www.google.com/maps/dir/"
+      }else{
+        callUrl = "https://www.google.com/maps/dir/";
+      }
+      
       let routes = resultList.routes;
       routes.forEach((value)=>{
 
