@@ -24,14 +24,17 @@
         <button ion-button icon-start>
           <ion-icon icon-left name="refresh-circle"></ion-icon>
         </button>
+        <ion-col text-center>
+          <button id="btn-close" ion-button color="dark" outline (click)="share()">Teilen</button>
+        </ion-col>
 
       </ion-col>
       <ion-col text-right (click)="createMapLink()">
         <button ion-button icon-start>
           <ion-icon icon-left name="map"></ion-icon>
         </button>
-
       </ion-col>
     </ion-row>
+
   </ion-toolbar>
 </ion-footer>
