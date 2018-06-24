@@ -40,8 +40,18 @@ export class ResultPage {
     }
   }
 
+
+
   getMapLink(i){
-    return "https://www.google.com/maps/@" +  this.likedCards[i].lng + ","+  this.likedCards[i].lat;
+    return "https://www.google.com/maps/place/?q=place_id:" +  this.likedCards[i].place_id;
+  }
+
+  getRouteLink(){
+
+  }
+
+  getShareLink(){
+
   }
 
   createMapLink() {
@@ -60,11 +70,10 @@ export class ResultPage {
 
     this.likedCards.forEach(function (value) {
       console.log(value);
-      url += value.lat + "," + value.lng + "%7C";
+      url += value.lng + "," + value.lat + "%7C";
     });
 
     url +=  "&key=AIzaSyDRMVqSJjQJ2bnodfTwNcIJy1wpXiYYaYE";
-
 
     let body = new FormData();
     body.append('routeLink', url);
