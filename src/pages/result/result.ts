@@ -46,17 +46,6 @@ export class ResultPage {
     return "https://www.google.com/maps/place/?q=place_id:" +  this.likedCards[i].place_id;
   }
 
-  getRouteLink(){
-
-    let link = this.createMapLink();
-    console.log(link);
-    window.open( link, "Zweitfenster", "width=300,height=400,left=100,top=200");
-
-  }
-
-  getShareLink(){
-    return this.createMapLink();
-  }
 
   createMapLink():string {
 
@@ -86,6 +75,9 @@ export class ResultPage {
     body.append('routeLink', url);
     let backendUrl = "http://5.230.145.170/FRinder/places/route";
     this.http.post(backendUrl, body).subscribe(result => {
+
+      console.log(result);
+
       let resultList = result.json().result;
       callUrl = "https://www.google.com/maps/dir/";
 
@@ -94,9 +86,6 @@ export class ResultPage {
 
        value.legs.forEach((leg)=>{
           let end = leg.end_location;
-          let lat = end.lat;
-          let lng = end.lng;
-
          callUrl += end.lat + "," + end.lng + "/"
 
        });
@@ -105,11 +94,7 @@ export class ResultPage {
 
       callUrl += "@47.984928,7.827998/data=!4m2!4m1!3e2";
 
+      window.open( callUrl, "_system");
     });
-
-
-    return callUrl;
-
-
   };
 }
