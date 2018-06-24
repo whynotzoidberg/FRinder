@@ -19,8 +19,8 @@ ion-header .toolbar-background {
   background: color($colors, primary);
 }
 
-.toolbar-title.toolbar-title-md, 
-.toolbar-title.toolbar-title-ios, 
+.toolbar-title.toolbar-title-md,
+.toolbar-title.toolbar-title-ios,
 .toolbar-title.toolbar-title-wp { color: color($colors, light); }
 
 button {
@@ -51,7 +51,7 @@ button {
 }
 
 .card-background-page{
-	background-image:url('/assets/imgs/bg2.jpg'); 
+	background-image:url('/assets/imgs/bg2.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -77,4 +77,8 @@ button {
 }
 #btn-like{
 	width: 100%;
+}
+
+.scroll-content{
+  margin-left: auto; margin-right: auto; max-width: 700px;
 }

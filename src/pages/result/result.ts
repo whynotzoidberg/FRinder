@@ -60,7 +60,7 @@ export class ResultPage {
 
     this.likedCards.forEach(function (value) {
       console.log(value);
-      url += value.lat + "," + value.lng + "%7C";
+      url += value.lng + "," + value.lat + "%7C";
     });
 
     url +=  "&key=AIzaSyDRMVqSJjQJ2bnodfTwNcIJy1wpXiYYaYE";
