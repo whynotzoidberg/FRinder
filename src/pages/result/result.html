@@ -22,22 +22,23 @@
 <ion-footer>
   <ion-toolbar>
     <ion-row>
-      <ion-col text-left (click)="restart()">
-        <button ion-button icon-start>
+      <ion-col text-left>
+        <button ion-button icon-start (click)="restart()">
           <ion-icon icon-left name="refresh-circle"></ion-icon>
-          Neu startern
+          Neu
         </button>
-        <ion-col text-center>
-          <button id="btn-close" ion-button color="dark" outline>Teilen</button>
+      </ion-col>
 
-        </ion-col>
+      <ion-col text-center>
+        <button id="btn-close" ion-button color="dark" outline>Teilen</button>
 
       </ion-col>
+
       <ion-col text-right>
         <button ion-button icon-start (click)="createMapLink()">
           <ion-icon icon-left name="map"></ion-icon>
+          Tour
         </button>
-
       </ion-col>
     </ion-row>
   </ion-toolbar>
